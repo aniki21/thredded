@@ -45,6 +45,14 @@ module Thredded
       @policy.moderate?
     end
 
+    def path
+      if first_unread
+        Thredded::UrlsHelper.post_path(first_unread, user: @read_state.user)
+      else
+        Thredded::UrlsHelper.topic_path(@topic, page: @read_state.page)
+      end
+    end
+
     def edit_path
       Thredded::UrlsHelper.edit_messageboard_topic_path(@topic.messageboard, @topic)
     end
@@ -63,6 +71,15 @@ module Thredded
 
     def messageboard_path
       Thredded::UrlsHelper.messageboard_topics_path(@topic.messageboard)
+    end
+
+    def first_unread
+      @_first_unread ||= if @read_state.is_a?(Thredded::UserTopicReadState)
+                          @topic.posts.where("created_at >= ?", @read_state.read_at)
+                            .order(created_at: :asc).first
+                        else
+                          nil
+                        end
     end
   end
 end
