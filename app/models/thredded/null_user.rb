@@ -43,5 +43,9 @@ module Thredded
     def thredded_display_name
       to_s
     end
+
+    def thredded_can_read_messageboards
+      Thredded::Messageboard.public
+    end
   end
 end
