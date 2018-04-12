@@ -82,7 +82,8 @@ module Thredded
     scope :ordered_by_topics_count_desc, ->() {
       order(topics_count: :desc)
     }
-    scope :public, ->() { where(private: false) }
+    scope :is_public, ->() { where(private: false) }
+    scope :is_private, ->() { where(private: true) }
     # rubocop:enable Style/Lambda
 
     # Finds the messageboard by its slug or ID, or raises Thredded::Errors::MessageboardNotFound.
