@@ -34,11 +34,16 @@ module Thredded
     end
 
     def recent
+      unread_topics = policy_scope(Thredded::Topic.all)
+        .order_recently_posted_first
+        .select("thredded_topics.*, thredded_user_topic_read_states.read_at")
+        .joins("LEFT JOIN thredded_user_topic_read_states ON thredded_user_topic_read_states.postable_id = thredded_topics.id AND thredded_user_topic_read_states.user_id = #{thredded_current_user.id}")
+        .where("thredded_user_topic_read_states.read_at IS NULL OR thredded_user_topic_read_states.read_at < thredded_topics.last_post_at")
+        .page(current_page)
+
       @topics = Thredded::TopicsPageView.new(
         thredded_current_user,
-        policy_scope(Thredded::Topic.all)
-          .order_recently_posted_first
-          .page(current_page)
+        unread_topics
       )
     end
 
