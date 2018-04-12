@@ -13,8 +13,8 @@ module Thredded
 
     after_action :update_user_activity
 
-    after_action :verify_authorized, except: %i[search]
-    after_action :verify_policy_scoped, except: %i[show new create edit update destroy follow unfollow]
+    after_action :verify_authorized, except: %i[search recent]
+    after_action :verify_policy_scoped, except: %i[show new create edit update destroy follow unfollow recent]
 
     def index
       authorize_reading messageboard
@@ -31,6 +31,15 @@ module Thredded
       Thredded::TopicForm.new(messageboard: messageboard, user: thredded_current_user).tap do |form|
         @new_topic = form if policy(form.topic).create?
       end
+    end
+
+    def recent
+      @topics = Thredded::TopicsPageView.new(
+        thredded_current_user,
+        policy_scope(Thredded::Topic.all)
+          .order_recently_posted_first
+          .page(current_page)
+      )
     end
 
     def show

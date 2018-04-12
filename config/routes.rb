@@ -5,6 +5,8 @@ Thredded::Engine.routes.draw do # rubocop:disable Metrics/BlockLength
 
   page_constraint = { page: /[1-9]\d*/ }
 
+  get '/recent', to: 'topics#recent'
+
   scope path: 'private-topics' do
     resource :read_state, only: [:update], as: :mark_all_private_topics_read
     resource :private_topic, only: [:new], path: '' do

@@ -1,0 +1,24 @@
+<% content_for :thredded_page_id, 'thredded--topics-index' %>
+<% content_for :thredded_breadcrumbs, render('thredded/shared/breadcrumbs', recent: true) %>
+
+<%= thredded_page do %>
+  <div class="thredded--svg-definitions ">
+    <%= inline_svg 'thredded/follow.svg', id: 'thredded-follow-icon', title: nil %>
+    <%= inline_svg 'thredded/unfollow.svg', id: 'thredded-unfollow-icon' %>
+  </div>
+
+  <%= content_tag :section, class: 'thredded--main-section thredded--topics', 'data-thredded-topics' => true do %>
+    <%= render partial: 'thredded/topics/topic',
+               collection: @topics,
+               locals: {
+                 sticky_topics_divider: true,
+                 topics: @topics,
+                 show_messageboard: true
+               } %>
+  <% end %>
+
+  <footer class="thredded--pagination-bottom">
+    <%= paginate @topics %>
+  </footer>
+
+<% end %>

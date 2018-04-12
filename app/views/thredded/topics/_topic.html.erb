@@ -1,3 +1,4 @@
+<% show_messageboard ||= false %>
 <%= content_tag :article,
                 id:    dom_id(topic),
                 class: ['thredded--topics--topic', topic_css_classes(topic)],
@@ -27,6 +28,9 @@
   <cite class="thredded--topics--updated-by">
     <%= time_ago topic.last_post_at %>
     <%= user_link topic.last_user %>
+    <% if show_messageboard %>
+      in <%= link_to topic.messageboard_name, topic.messageboard_path %>
+    <% end %>
   </cite>
 
   <cite class="thredded--topics--started-by">
