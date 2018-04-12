@@ -6,7 +6,7 @@ module Thredded
     include Thredded::NewPostParams
 
     before_action :thredded_require_login!,
-                  only: %i[edit new update create destroy follow unfollow]
+                  only: %i[edit new update create destroy follow unfollow recent]
 
     before_action :use_topic_messageboard,
                   only: %i[show edit update destroy follow unfollow]

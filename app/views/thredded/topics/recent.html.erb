@@ -8,13 +8,17 @@
   </div>
 
   <%= content_tag :section, class: 'thredded--main-section thredded--topics', 'data-thredded-topics' => true do %>
-    <%= render partial: 'thredded/topics/topic',
-               collection: @topics,
-               locals: {
-                 sticky_topics_divider: true,
-                 topics: @topics,
-                 show_messageboard: true
-               } %>
+    <% unless @topics.blank? %>
+      <%= render partial: 'thredded/topics/topic',
+                 collection: @topics,
+                 locals: {
+                   sticky_topics_divider: true,
+                   topics: @topics,
+                   show_messageboard: true
+                 } %>
+    <% else %>
+      <p>Nothing to see here</p>
+    <% end %>
   <% end %>
 
   <footer class="thredded--pagination-bottom">
