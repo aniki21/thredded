@@ -45,7 +45,7 @@ module Thredded
     end
 
     def thredded_can_read_messageboards
-      Thredded::Messageboard.public
+      Thredded::Messageboard.is_public
     end
   end
 end
