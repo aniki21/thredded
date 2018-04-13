@@ -34,6 +34,12 @@
       </div>
     <% end %>
 
+    <div class="thredded--main-navigation">
+      <hr />
+      <%= yield :thredded_breadcrumbs %>
+    </div>
+
+
     <% if topic.can_destroy? %>
       <div class="thredded--topic-delete--wrapper">
         <%= button_to t('thredded.topics.delete_topic'), topic.destroy_path, method: :delete,
@@ -42,5 +48,6 @@
                       'data-confirm' => t('thredded.topics.delete_confirm') %>
       </div>
     <% end %>
+
   <% end %>
 <% end %>
