@@ -235,6 +235,8 @@ en:
         label: Sticky
       unfollow: Stop following
       unfollowed_notice: You are no longer following this topic
+      unresd: Unread topics
+      unread_none: You're all caught up!
       updated_notice: Topic updated
     users:
       currently_online: Currently Online

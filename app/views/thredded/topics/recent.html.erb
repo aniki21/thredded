@@ -8,6 +8,7 @@
   </div>
 
   <%= content_tag :section, class: 'thredded--main-section thredded--topics', 'data-thredded-topics' => true do %>
+    <h2><%= t('thredded.topics.unread') %></h2>
     <% unless @topics.blank? %>
       <%= render partial: 'thredded/topics/topic',
                  collection: @topics,
@@ -17,7 +18,7 @@
                    show_messageboard: true
                  } %>
     <% else %>
-      <p>Nothing to see here</p>
+      <p><%= t('thredded.topics.unread_none') %></p>
     <% end %>
   <% end %>
 
