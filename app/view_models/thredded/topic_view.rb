@@ -75,7 +75,7 @@ module Thredded
 
     def first_unread
       @_first_unread ||= if @read_state.is_a?(Thredded::UserTopicReadState)
-                          @topic.posts.where("created_at >= ?", @read_state.read_at)
+                          @topic.posts.where("created_at > ?", @read_state.read_at)
                             .order(created_at: :asc).first
                         else
                           nil
