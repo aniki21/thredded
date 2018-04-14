@@ -46,9 +46,16 @@
 
     <% if current_thredded_user.admin? %>
       <h2>Special access</h2>
-      <%= form_for @user do |f| %>
-        <%= f.label Thredded.moderator_column, 'Moderator' %>
-        <%= f.check_box Thredded.moderator_column %>
+      <%= form_for [:admin, :moderation, @user], html: { class: 'thredded--form' } do |f| %>
+        <ul class="thredded--form-list">
+          <li>
+            <%= f.label Thredded.moderator_column, 'Moderator' %>
+            <label style="font-weight:normal">
+              <%= f.check_box Thredded.moderator_column %>
+              Grant this user moderator access
+            </label>
+          </li>
+        </ul>
         <%= f.submit 'Save' %>
       <% end %>
     <% end %>
