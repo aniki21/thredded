@@ -73,6 +73,15 @@ module Thredded
       redirect_back fallback_location: user_moderation_path(user.id)
     end
 
+    def update_user
+      if current_thredded_user.admin?
+        user = Thredded.user_class.find(params[:id])
+        user[Thredded.moderator_column] = user_params[:moderator]
+        user.save
+      end
+      redirect_back fallback_location: user_moderation_path(user.id)
+    end
+
     private
 
     def maybe_set_last_moderated_record_flash

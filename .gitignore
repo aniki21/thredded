@@ -31,3 +31,5 @@ tmp/
 .rbenv-version
 .rbenv-vars
 .rbfu-version
+*.swp
+*.swo
