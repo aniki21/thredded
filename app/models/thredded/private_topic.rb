@@ -73,6 +73,10 @@ module Thredded
       Thredded.slugifier.call(input.to_s)
     end
 
+    def user_names
+      Thredded.user_class.where(id: user_ids).pluck(Thredded.user_display_name_method).join(', ')
+    end
+
     private
 
     def slug_candidates

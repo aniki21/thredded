@@ -24,6 +24,15 @@
                               required: true %>
         </li>
         <li>
+          <%= form.label :user_names, t('thredded.private_topics.form.users_label') %>
+          <%= form.text_area :user_names,
+                            placeholder: t('thredded.private_topics.form.users_placeholder'),
+                            'data-thredded-users-select' => true,
+                            'data-autocomplete-url' => autocomplete_users_path,
+                            'data-autocomplete-min-length' => Thredded.autocomplete_min_length,
+                            rows: 1 %>
+        </li>
+        <li>
           <button type="submit" class="thredded--form--submit"
                   data-disable-with="<%= t 'thredded.private_topics.form.update_btn_submitting' %>">
             <%= t('thredded.private_topics.form.update_btn') %>

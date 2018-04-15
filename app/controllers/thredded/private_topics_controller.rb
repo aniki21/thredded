@@ -65,6 +65,7 @@ module Thredded
     end
 
     def update
+      puts private_topic_params.to_json
       authorize private_topic, :update?
       if private_topic.update(private_topic_params)
         redirect_to private_topic_url(private_topic),
@@ -96,7 +97,14 @@ module Thredded
     def private_topic_params
       params
         .require(:private_topic)
-        .permit(:title)
+        .permit(:title, :user_names)
+        .tap { |p| adapt_user_names! p }
+        .except(:user_names)
+    end
+
+    def adapt_user_names!(p)
+      p[:user_names] = p[:user_names].split(',').map(&:strip) if p[:user_names].is_a?(String)
+      p[:user_ids] = Thredded.user_class.where(:"#{Thredded.user_display_name_method}" => p[:user_names]).pluck(:id)
     end
   end
 end

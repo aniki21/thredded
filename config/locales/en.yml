@@ -186,7 +186,7 @@ en:
       no_private_topics:
         create_btn: Start your first private conversation
         title: You have no private messages.
-      updated_notice: Title updated
+      updated_notice: Private topic updated
     recent_activity: Recent activity
     search:
       form:
