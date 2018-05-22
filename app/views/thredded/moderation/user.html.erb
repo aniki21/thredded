@@ -44,7 +44,7 @@
       </div>
     <% end %>
 
-    <% if current_thredded_user.admin? %>
+    <% if thredded_current_user.admin? %>
       <h2>Special access</h2>
       <%= form_for [:admin, :moderation, @user], html: { class: 'thredded--form' } do |f| %>
         <ul class="thredded--form-list">
